@@ -9,7 +9,7 @@
 - **언어**: Java
 
 ## ERD (엔터티 관계도)
-![Image](https://github.com/user-attachments/assets/629eea12-bc03-49fa-b3bf-ac360715550d)
+![Image](https://github.com/user-attachments/assets/342d0509-5786-498d-8431-cd8690adad35)
 
 ## API 엔드포인트
 
