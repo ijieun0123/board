@@ -1,9 +1,12 @@
 package com.example.board.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "board")
+@Getter
 public class Board extends BaseEntity {
 
     @Id
@@ -18,5 +21,13 @@ public class Board extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "member_id")
-    private Member member;
+    @Setter private Member member;
+
+    public Board() {
+    }
+
+    public Board(String title, String contents) {
+        this.title = title;
+        this.contents = contents;
+    }
 }
