@@ -5,14 +5,17 @@ import com.example.board.dto.SignUpResponseDto;
 import com.example.board.entity.Member;
 import com.example.board.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class MemberService {
 
     private final MemberRepository memberRepository;
@@ -37,5 +40,17 @@ public class MemberService {
         Member findMember = optionalMember.get();
 
         return new MemberResponseDto(findMember.getUsername(), findMember.getAge());
+    }
+
+    @Transactional
+    public void updatePassword(Long id, String oldPassword, String newPassword) {
+
+        Member findMember = memberRepository.findByIdOrElseThrow(id);
+
+        if(!findMember.getPassword().equals(oldPassword)){
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Password is wrong");
+        }
+
+        findMember.setPassword(newPassword);
     }
 }

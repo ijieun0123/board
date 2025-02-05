@@ -2,6 +2,7 @@ package com.example.board.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Entity
@@ -16,7 +17,7 @@ public class Member extends BaseEntity{
     private String username;
 
     @Column(nullable = false)
-    private  String password;
+    @Setter private  String password;
 
     private Integer age;
 
