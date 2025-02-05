@@ -4,6 +4,7 @@ import com.example.board.dto.BoardResponseDto;
 import com.example.board.dto.BoardWithAgeResponseDto;
 import com.example.board.dto.CreateBoardRequestDto;
 import com.example.board.service.BoardService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class BoardController {
 
     // 게시글 생성
     @PostMapping
-    public ResponseEntity<BoardResponseDto> save(@RequestBody CreateBoardRequestDto createBoardRequestDto){
+    public ResponseEntity<BoardResponseDto> save(@Valid @RequestBody CreateBoardRequestDto createBoardRequestDto){
         BoardResponseDto boardResponseDto = boardService.save(createBoardRequestDto.getTitle(), createBoardRequestDto.getContents(), createBoardRequestDto.getUsername());
 
         return new ResponseEntity<>(boardResponseDto, HttpStatus.CREATED);

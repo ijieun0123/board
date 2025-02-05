@@ -5,6 +5,7 @@ import com.example.board.dto.SignUpRequestDto;
 import com.example.board.dto.SignUpResponseDto;
 import com.example.board.dto.UpdatePasswordRequestDto;
 import com.example.board.service.MemberService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/signup")
-    public ResponseEntity<SignUpResponseDto> signUp(@RequestBody SignUpRequestDto signUpRequestDto){
+    public ResponseEntity<SignUpResponseDto> signUp(@Valid  @RequestBody SignUpRequestDto signUpRequestDto){
 
         SignUpResponseDto signUpResponseDto =
                 memberService.signUp(
@@ -40,7 +41,7 @@ public class MemberController {
     @PatchMapping("/{id}")
     public ResponseEntity<Void> updatePassword(
             @PathVariable Long id,
-            @RequestBody UpdatePasswordRequestDto updatePasswordRequestDto
+            @Valid  @RequestBody UpdatePasswordRequestDto updatePasswordRequestDto
     ){
         memberService.updatePassword(id, updatePasswordRequestDto.getOldPassword(), updatePasswordRequestDto.getNewPassword());
 
